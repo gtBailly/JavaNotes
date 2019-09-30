@@ -1,10 +1,6 @@
 
 # BIO,NIO,AIO 总结
 
- Java 中的 BIO、NIO和 AIO 理解为是 Java 语言对操作系统的各种 IO 模型的封装。程序员在使用这些 API 的时候，不需要关心操作系统层面的知识，也不需要根据不同操作系统编写不同的代码。只需要使用Java的API就可以了。
-
-在讲 BIO,NIO,AIO 之前先来回顾一下这样几个概念：同步与异步，阻塞与非阻塞。
-
 **同步与异步**
 
 - **同步：** 同步就是发起一个调用后，被调用者未处理完请求之前，调用不返回。
@@ -26,7 +22,7 @@
 
 ### 1.1 传统 BIO
 
-BIO通信（一请求一应答）模型图如下(图源网络，原出处不明)：
+BIO通信（一请求一应答）模型图如下：
 
 ![传统BIO通信模型图](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2.png)
 
@@ -59,14 +55,7 @@ BIO通信（一请求一应答）模型图如下(图源网络，原出处不明)
 **客户端**
 
 ```java
-/**
- * 
- * @author 闪电侠
- * @date 2018年10月14日
- * @Description:客户端
- */
 public class IOClient {
-
   public static void main(String[] args) {
     // TODO 创建多个线程，模拟多个客户端连接服务端
     new Thread(() -> {
@@ -82,7 +71,6 @@ public class IOClient {
       } catch (IOException e) {
       }
     }).start();
-
   }
 
 }
@@ -92,11 +80,6 @@ public class IOClient {
 **服务端**
 
 ```java
-/**
- * @author 闪电侠
- * @date 2018年10月14日
- * @Description: 服务端
- */
 public class IOServer {
 
   public static void main(String[] args) throws IOException {
@@ -215,12 +198,6 @@ NIO 包含下面几个核心的组件：
 客户端 IOClient.java 的代码不变，我们对服务端使用 NIO 进行改造。以下代码较多而且逻辑比较复杂，大家看看就好。
 
 ```java
-/**
- * 
- * @author 闪电侠
- * @date 2019年2月21日
- * @Description: NIO 改造后的服务端
- */
 public class NIOServer {
   public static void main(String[] args) throws IOException {
     // 1. serverSelector负责轮询是否有新的连接，服务端监测到新的连接之后，不再创建一个新的线程，
